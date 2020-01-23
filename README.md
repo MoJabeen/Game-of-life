@@ -5,7 +5,7 @@
 3. LIVE cell with > 3 neighbours = DEAD 
 4. DEAD cell with 3 neighbours = LIVE
 
-##TODO:
+## DONE:
 
--Tests files 
--Import grid file
+1. Implemented main file to choose between new grid or import with fully working code
+2. Implemented simple tests

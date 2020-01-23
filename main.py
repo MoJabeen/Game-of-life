@@ -38,16 +38,16 @@ def render_output(grid):
 	return "\n".join(lines)
 
 def next_state(grid):
-	newgrid = dead_state(len(grid),len(grid[0]))
+	newgrid = dead_state(len(grid[0]),len(grid))
 	circle = []
 	for row in range(len(grid)):
-		for elem in range(len(grid[row])):
+		for elem in range(len(grid[0])):
 			circle = calculate_circle(row,elem,grid)
 			numboflive = 0
 			for position in circle:
 				if grid[position[0]][position[1]]:
 			 		numboflive += 1
-			# print('row:',row,'elem:',elem)
+			#print('row:',row,'elem:',elem)
 			# print(numboflive)
 			# print(circle)
 			newgrid[row][elem]= rule_check(numboflive,grid[row][elem])
@@ -92,19 +92,45 @@ def rule_check(numboflive,cell):
 		else:
 			return 0
 
+def read_from_file(filename):
+	gridin = open(filename,'r')
+	name = ''
+	temp = []
+	data = []
+	for line in gridin:
+		final = []
+		name = line.rstrip()
+		temp = list(name)
+		for i in temp:
+			final.append(int(i))
+		data.append(final)
 
-#grid = dead_state(2,2)
-#grid = [[0,1,0],[0,1,1],[1,1,0]]
-""" grid = [[0,0,0,0,0,0],
-[0,0,0,0,0,0],
-[0,0,1,1,1,0],
-[0,1,1,1,0,0],
-[0,0,0,0,0,0],
-[0,0,0,0,0,0]]
-#random_grid(grid)
+	return data
+
+choice = 0
+width = 0 
+height = 0
+
+filename= ''
+
+print("Choose 1 for chosen grid size or 0 to enter a filename:")
+choice  = input()
+if choice == '1':
+	print("Enter width and height")
+	width = int(input())
+	height = int(input())
+	grid = dead_state(width,height)
+	random_grid(grid)
+else:
+	print("Enter filename:")
+	filename = input()
+	grid = read_from_file(filename)
+
 print(grid)
+print(render_output(grid))
+
 while(1):
 	grid = next_state(grid)
 	#print(grid)
 	print(render_output(grid))
-	time.sleep(0.03) """
+	time.sleep(0.03)
