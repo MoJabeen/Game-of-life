@@ -42,7 +42,7 @@ def next_state(grid):
 	circle = []
 	for row in range(len(grid)):
 		for elem in range(len(grid[row])):
-			circle = calculate_circle(row,elem)
+			circle = calculate_circle(row,elem,grid)
 			numboflive = 0
 			for position in circle:
 				if grid[position[0]][position[1]]:
@@ -53,7 +53,7 @@ def next_state(grid):
 			newgrid[row][elem]= rule_check(numboflive,grid[row][elem])
 	return newgrid
 
-def calculate_circle(row,elem):
+def calculate_circle(row,elem,grid):
 	maxheight = len(grid)
 	maxwidth = len(grid[0])
 
@@ -95,7 +95,7 @@ def rule_check(numboflive,cell):
 
 #grid = dead_state(2,2)
 #grid = [[0,1,0],[0,1,1],[1,1,0]]
-grid = [[0,0,0,0,0,0],
+""" grid = [[0,0,0,0,0,0],
 [0,0,0,0,0,0],
 [0,0,1,1,1,0],
 [0,1,1,1,0,0],
@@ -107,4 +107,4 @@ while(1):
 	grid = next_state(grid)
 	#print(grid)
 	print(render_output(grid))
-	time.sleep(0.03)
+	time.sleep(0.03) """
